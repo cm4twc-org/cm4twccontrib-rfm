@@ -1,10 +1,29 @@
 import numpy as np
 import warnings
 
-from cm4twc.components import OpenWaterComponent
+import cm4twc
 
 
-class RFM(OpenWaterComponent):
+class OpenWaterComponent(cm4twc.components.OpenWaterComponent):
+    """
+    River flow model (RFM) is a runoff routing model based on a discrete
+    approximation of the one-directional kinematic wave with lateral
+    inflow (`Bell et al., 2007 <https://doi.org/10.5194/hess-11-532-2007>`_,
+    `Dadson et al., 2011 <https://doi.org/10.1016/j.jhydrol.2011.10.002>`_).
+
+    The wave equation is parametrised differently for surface and
+    sub-surface pathways, themselves split into a land domain, and a
+    river domain. Return flow is also possible between surface and
+    sub-surface pathways in each domain.
+
+    This Python implementation of RFM is based on the work by Huw Lewis.
+
+    :contributors: Huw Lewis [1]
+    :affiliations:
+        1. UK Met Office
+    :licence: UK Open Government
+    :copyright: 2020, UK Met Office
+    """
     _inputs_info = {
         'i_area': {
             'units': '1',
@@ -152,12 +171,12 @@ class RFM(OpenWaterComponent):
         theta = np.zeros(shape)
         s_theta = np.zeros(shape)
         ret_flow = np.zeros(shape)
-        theta[land] = l_theta
-        theta[riv] = r_theta
-        s_theta[land] = sub_l_theta
-        s_theta[riv] = sub_r_theta
-        ret_flow[land] = ret_l
-        ret_flow[riv] = ret_r
+        theta[land] = l_theta[land]
+        theta[riv] = r_theta[riv]
+        s_theta[land] = sub_l_theta[land]
+        s_theta[riv] = sub_r_theta[riv]
+        ret_flow[land] = ret_l[land]
+        ret_flow[riv] = ret_r[riv]
         mask = np.ones(shape)
         mask[sea] = 0
 

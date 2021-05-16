@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 
 pkg_name = 'RFM'
@@ -34,7 +34,7 @@ setup(
         'Topic :: Scientific/Engineering :: Hydrology',
     ],
 
-    packages=find_packages(),
+    packages=find_namespace_packages(include=['cm4twccontrib.*']),
 
     namespace_packages=['cm4twccontrib'],
 

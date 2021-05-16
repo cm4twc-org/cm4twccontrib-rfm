@@ -42,4 +42,6 @@ setup(
         'cm4twc'
     ],
 
+    zip_safe=False
+
 )

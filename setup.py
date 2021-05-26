@@ -6,7 +6,7 @@ pkg_name = 'RFM'
 with open("README.rst", 'r') as fh:
     long_desc = fh.read()
 
-with open("cm4twccontrib/{}/version.py".format(pkg_name), 'r') as fv:
+with open("cm4twccontrib/{}/version.py".format(pkg_name.lower()), 'r') as fv:
     exec(fv.read())
 
 

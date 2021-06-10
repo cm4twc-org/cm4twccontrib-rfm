@@ -23,7 +23,7 @@ setup(
 
     project_urls={
         'Source Code':
-            'https://github.com/hydro-jules/cm4twccontrib-{}'.format(pkg_name.lower())
+            'https://github.com/cm4twc-org/cm4twccontrib-{}'.format(pkg_name.lower())
     },
 
     license='UK Open Government',
@@ -43,5 +43,4 @@ setup(
     ],
 
     zip_safe=False
-
 )

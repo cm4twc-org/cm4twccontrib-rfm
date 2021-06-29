@@ -4,7 +4,7 @@ import warnings
 import cm4twc
 
 
-class OpenWaterComponent(cm4twc.components.OpenWaterComponent):
+class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
     """
     River flow model (RFM) is a runoff routing model based on a discrete
     approximation of the one-directional kinematic wave with lateral

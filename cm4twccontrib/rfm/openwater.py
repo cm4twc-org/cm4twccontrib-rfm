@@ -108,7 +108,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             'description': 'streamflow at outlet of grid element'
         }
     }
-    _flow_direction = True
+    _requires_flow_direction = True
 
     def initialise(self,
                    # component states

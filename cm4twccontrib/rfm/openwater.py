@@ -147,20 +147,24 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         # Set theta values
         r_theta = c_river * dt / dx
         if np.any(r_theta < 0) or np.any(r_theta > 1):
-            warnings.warn("theta river surface not within [0, 1]",
-                          RuntimeWarning)
+            warnings.warn(
+                "theta river surface not within [0, 1]", RuntimeWarning
+            )
         sub_r_theta = cb_river * dt / dx
         if np.any(sub_r_theta < 0) or np.any(sub_r_theta > 1):
-            warnings.warn("theta river subsurface not within [0, 1]",
-                          RuntimeWarning)
+            warnings.warn(
+                "theta river subsurface not within [0, 1]", RuntimeWarning
+            )
         l_theta = c_land * dt / dx
-        if np.any(sub_r_theta < 0) or np.any(sub_r_theta > 1):
-            warnings.warn("theta land surface not within [0, 1]",
-                          RuntimeWarning)
+        if np.any(l_theta < 0) or np.any(l_theta > 1):
+            warnings.warn(
+                "theta land surface not within [0, 1]", RuntimeWarning
+            )
         sub_l_theta = cb_land * dt / dx
-        if np.any(sub_r_theta < 0) or np.any(sub_r_theta > 1):
-            warnings.warn("theta land subsurface not within [0, 1]",
-                          RuntimeWarning)
+        if np.any(sub_l_theta < 0) or np.any(sub_l_theta > 1):
+            warnings.warn(
+                "theta land subsurface not within [0, 1]", RuntimeWarning
+            )
 
         # define sea/land/river points
         sea = np.where(i_area < 0)

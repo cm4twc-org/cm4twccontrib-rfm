@@ -109,6 +109,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         }
     }
     _requires_flow_direction = True
+    _requires_cell_area = True
 
     def initialise(self,
                    # component states
@@ -137,9 +138,9 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         # /!\__RENAMING_CM4TWC__________________________________________
         dt = self.timedelta_in_seconds
         shape = self.spaceshape
+        area = self.spacedomain.cell_area
 
         dx = river_length
-        area = dx * dx
         surf_in = surface_runoff
         sub_in = subsurface_runoff
         # ______________________________________________________________

@@ -116,10 +116,10 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
                    **kwargs):
 
         # set initialise conditions for component states
-        flow_in[-1][:] = 0
-        b_flow_in[-1][:] = 0
-        surf_store[-1][:] = 0
-        sub_store[-1][:] = 0
+        flow_in.set_timestep(-1, 0.)
+        b_flow_in.set_timestep(-1, 0.)
+        surf_store.set_timestep(-1, 0.)
+        sub_store.set_timestep(-1, 0.)
 
     def run(self,
             # from exchanger
@@ -142,6 +142,11 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         dx = river_length
         surf_in = surface_runoff
         sub_in = subsurface_runoff
+
+        flow_in = (flow_in.get_timestep(0), flow_in.get_timestep(-1))
+        b_flow_in = (b_flow_in.get_timestep(0), b_flow_in.get_timestep(-1))
+        surf_store = (surf_store.get_timestep(0), surf_store.get_timestep(-1))
+        sub_store = (sub_store.get_timestep(0), sub_store.get_timestep(-1))
         # ______________________________________________________________
 
         # Set theta values

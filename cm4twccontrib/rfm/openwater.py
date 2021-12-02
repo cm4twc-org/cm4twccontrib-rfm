@@ -62,9 +62,9 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             'description': 'river return flow fraction '
                            '(resolution dependent)'
         },
-        'river_length': {
+        'routing_length': {
             'units': 'm',
-            'description': 'length of river reach'
+            'description': 'length of the routing path'
         }
     }
     _states_info = {
@@ -127,7 +127,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             # component inputs
             i_area,
             # component parameters
-            c_land, cb_land, c_river, cb_river, ret_l, ret_r, river_length,
+            c_land, cb_land, c_river, cb_river, ret_l, ret_r, routing_length,
             # component states
             flow_in, b_flow_in, surf_store, sub_store,
             # component constants
@@ -139,7 +139,6 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         shape = self.spaceshape
         area = self.spacedomain.cell_area
 
-        dx = river_length
         surf_in = surface_runoff
         sub_in = subsurface_runoff
 
@@ -147,6 +146,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         b_flow_in = (b_flow_in.get_timestep(0), b_flow_in.get_timestep(-1))
         surf_store = (surf_store.get_timestep(0), surf_store.get_timestep(-1))
         sub_store = (sub_store.get_timestep(0), sub_store.get_timestep(-1))
+        dx = routing_length
         # ______________________________________________________________
 
         # Set theta values

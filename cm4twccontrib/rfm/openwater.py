@@ -23,6 +23,11 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
     :licence: UK Open Government
     :copyright: 2020, UK Met Office
     """
+    _inwards = {
+        'surface_runoff_flux_delivered_to_rivers',
+        'net_groundwater_flux_to_rivers'
+    }
+    _outwards = {}
     _inputs_info = {
         'flow_accumulation': {
             'units': '1',
@@ -212,10 +217,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
 
         return (
             # to exchanger
-            {
-                'water_level':
-                    surf_store[0] * rho_lw
-            },
+            {},
             # component outputs
             {
                 'outgoing_water_volume_transport_along_river_channel':

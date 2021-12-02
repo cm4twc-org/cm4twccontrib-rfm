@@ -115,20 +115,8 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
     _requires_flow_direction = True
     _requires_cell_area = True
 
-    def initialise(self,
-                   # component states
-                   flow_in, b_flow_in, surf_store, sub_store,
-                   **kwargs):
-
-        # set initialise conditions for component states
-        flow_in.set_timestep(-1, 0.)
-        b_flow_in.set_timestep(-1, 0.)
-        surf_store.set_timestep(-1, 0.)
-        sub_store.set_timestep(-1, 0.)
-
-    def run(self,
-            # from exchanger
-            surface_runoff, subsurface_runoff,
+    def initialise(
+            self,
             # component inputs
             flow_accumulation,
             # component parameters
@@ -136,24 +124,24 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             # component states
             flow_in, b_flow_in, surf_store, sub_store,
             # component constants
-            a_thresh, rho_lw,
-            **kwargs):
+            a_thresh,
+            **kwargs
+    ):
 
         # /!\__RENAMING_CM4TWC__________________________________________
         dt = self.timedelta_in_seconds
         shape = self.spaceshape
-        area = self.spacedomain.cell_area
 
-        surf_in = surface_runoff
-        sub_in = subsurface_runoff
-
-        flow_in = (flow_in.get_timestep(0), flow_in.get_timestep(-1))
-        b_flow_in = (b_flow_in.get_timestep(0), b_flow_in.get_timestep(-1))
-        surf_store = (surf_store.get_timestep(0), surf_store.get_timestep(-1))
-        sub_store = (sub_store.get_timestep(0), sub_store.get_timestep(-1))
         dx = routing_length
         i_area = flow_accumulation
         # ______________________________________________________________
+
+        if not self.initialised_states:
+            # set initialise conditions for component states
+            flow_in.set_timestep(-1, 0.)
+            b_flow_in.set_timestep(-1, 0.)
+            surf_store.set_timestep(-1, 0.)
+            sub_store.set_timestep(-1, 0.)
 
         # Set theta values
         r_theta = c_river * dt / dx
@@ -195,6 +183,48 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         mask = np.ones(shape)
         mask[sea] = 0
 
+        # store pre-processed information on shelf
+        self.shelf.update(
+            {
+                'theta': theta,
+                's_theta': s_theta,
+                'ret_flow': ret_flow,
+                'mask': mask
+            }
+        )
+
+    def run(
+            self,
+            # from exchanger
+            surface_runoff_flux_delivered_to_rivers,
+            net_groundwater_flux_to_rivers,
+            # component states
+            flow_in, b_flow_in, surf_store, sub_store,
+            # component constants
+            rho_lw,
+            **kwargs
+    ):
+
+        # /!\__RENAMING_CM4TWC__________________________________________
+        dt = self.timedelta_in_seconds
+        area = self.spacedomain.cell_area
+
+        surf_in = surface_runoff_flux_delivered_to_rivers
+        sub_in = net_groundwater_flux_to_rivers
+        # ______________________________________________________________
+
+        # shorten API for states by creating tuples of views
+        flow_in = (flow_in.get_timestep(0), flow_in.get_timestep(-1))
+        b_flow_in = (b_flow_in.get_timestep(0), b_flow_in.get_timestep(-1))
+        surf_store = (surf_store.get_timestep(0), surf_store.get_timestep(-1))
+        sub_store = (sub_store.get_timestep(0), sub_store.get_timestep(-1))
+
+        # retrieve pre-processed information from shelf
+        theta = self.shelf['theta']
+        s_theta = self.shelf['s_theta']
+        ret_flow = self.shelf['ret_flow']
+        mask = self.shelf['mask']
+
         # convert units for input runoffs
         surf_runoff = mask * surf_in * dt * area / rho_lw
         sub_surf_runoff = mask * sub_in * dt * area / rho_lw
@@ -225,8 +255,8 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             }
         )
 
-    def finalise(self,
-                 # component states
-                 flow_in, b_flow_in, surf_store, sub_store,
-                 **kwargs):
+    def finalise(
+            self,
+            **kwargs
+    ):
         pass

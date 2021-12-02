@@ -24,7 +24,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
     :copyright: 2020, UK Met Office
     """
     _inputs_info = {
-        'i_area': {
+        'flow_accumulation': {
             'units': '1',
             'kind': 'static',
             'description': 'drainage area (specified in number of '
@@ -125,7 +125,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
             # from exchanger
             surface_runoff, subsurface_runoff,
             # component inputs
-            i_area,
+            flow_accumulation,
             # component parameters
             c_land, cb_land, c_river, cb_river, ret_l, ret_r, routing_length,
             # component states
@@ -147,6 +147,7 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
         surf_store = (surf_store.get_timestep(0), surf_store.get_timestep(-1))
         sub_store = (sub_store.get_timestep(0), sub_store.get_timestep(-1))
         dx = routing_length
+        i_area = flow_accumulation
         # ______________________________________________________________
 
         # Set theta values

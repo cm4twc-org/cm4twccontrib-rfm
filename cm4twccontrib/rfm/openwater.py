@@ -69,19 +69,19 @@ class OpenWaterComponent(cm4twc.component.OpenWaterComponent):
     }
     _states_info = {
         'flow_in': {
-            'units': 'm',
+            'units': 'm3',
             'description': 'surface flow from neighbouring cells'
         },
         'b_flow_in': {
-            'units': 'm',
+            'units': 'm3',
             'description': 'sub-surface flow from neighbouring cells'
         },
         'surf_store': {
-            'units': 'm',
+            'units': 'm3',
             'description': 'surface water store'
         },
         'sub_store': {
-            'units': 'm',
+            'units': 'm3',
             'description': 'sub-surface water store'
         }
     }

@@ -1,4 +1,4 @@
-A cm4twc-compliant version of the River Flow Model (RFM)
+A unifhy-compliant version of the River Flow Model (RFM)
 --------------------------------------------------------
 
 River Flow Model (RFM) is a runoff routing model based on a discrete

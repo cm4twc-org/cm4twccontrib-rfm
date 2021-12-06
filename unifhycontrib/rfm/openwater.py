@@ -128,7 +128,7 @@ class OpenWaterComponent(unifhy.component.OpenWaterComponent):
             **kwargs
     ):
 
-        # /!\__RENAMING_CM4TWC__________________________________________
+        # /!\__RENAMING_________________________________________________
         dt = self.timedelta_in_seconds
         shape = self.spaceshape
 
@@ -205,7 +205,7 @@ class OpenWaterComponent(unifhy.component.OpenWaterComponent):
             **kwargs
     ):
 
-        # /!\__RENAMING_CM4TWC__________________________________________
+        # /!\__RENAMING_________________________________________________
         dt = self.timedelta_in_seconds
         area = self.spacedomain.cell_area
 

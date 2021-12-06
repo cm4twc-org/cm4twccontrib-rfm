@@ -1,0 +1,15 @@
+{
+    "creators": [
+        {
+            "name": "Huw Lewis",
+            "affiliation": "Met Office, UK"
+        },
+        {
+            "name": "Thibault Hallouin",
+            "affiliation": "National Centre for Atmospheric Science, UK",
+            "orcid": "0000-0003-0144-2989"
+        }
+    ],
+    "title": "unifhycontrib-rfm",
+    "description": "A unifhy-compliant version of the river flow model (RFM)."
+}

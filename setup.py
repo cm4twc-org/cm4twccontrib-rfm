@@ -51,7 +51,7 @@ setup(
     namespace_packages=['unifhycontrib'],
 
     install_requires=[
-        'unifhy'
+        'unifhy==0.1.0'
     ],
 
     zip_safe=False

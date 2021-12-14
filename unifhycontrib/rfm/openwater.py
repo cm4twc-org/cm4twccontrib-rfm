@@ -17,9 +17,10 @@ class OpenWaterComponent(unifhy.component.OpenWaterComponent):
 
     This Python implementation of RFM is based on the work by Huw Lewis.
 
-    :contributors: Huw Lewis [1]
+    :contributors: Huw Lewis [1], Thibault Hallouin [2]
     :affiliations:
         1. UK Met Office
+        2. Department of Meteorology, University of Reading
     :licence: UK Open Government
     :copyright: 2020, UK Met Office
     """

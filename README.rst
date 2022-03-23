@@ -26,3 +26,14 @@ This Python implementation of RFM is based on the work by Huw Lewis.
     2. Department of Meteorology, University of Reading
 :licence: UK Open Government
 :copyright: 2020, UK Met Office
+:codebase: https://github.com/unifhy-org/unifhycontrib-rfm
+
+
+How to install
+~~~~~~~~~~~~~~
+
+This package is available on PyPI, so you can simply run:
+
+.. code-block:: bash
+
+   pip install unifhycontrib-rfm

@@ -23,6 +23,7 @@ class OpenWaterComponent(unifhy.component.OpenWaterComponent):
         2. Department of Meteorology, University of Reading
     :licence: UK Open Government
     :copyright: 2020, UK Met Office
+    :codebase: https://github.com/unifhy-org/unifhycontrib-rfm
     """
     _inwards = {
         'surface_runoff_flux_delivered_to_rivers',
